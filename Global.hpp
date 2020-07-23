@@ -7,6 +7,11 @@ struct poin{
     int col;
 };
 
+struct hash_pair{
+    int value;
+    int depth;
+};
+
 //MUST win
 const int inf=100000000;
 
@@ -24,5 +29,11 @@ int Gobang_board[15][15];
 
 int turn;
 int side;
+
+//for Zobrist
+//0:blank_____1:black_____2:white
+int zobrist_hash[15][15][3];
+int zobrist_val;
+std::map<int, hash_pair> zobrist_recorder;
 
 #endif
