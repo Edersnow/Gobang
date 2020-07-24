@@ -47,7 +47,7 @@ int MMSearch(int cur_layer, int max_layer, int cur_side, int ABnum){
             if (isEnd)  return -inf;
 
             update_board(tmppoi.row, tmppoi.col, cur_side);
-            if (zobrist_recorder.count(zobrist_val) && zobrist_recorder[zobrist_val].depth == max_layer - cur_layer){
+            if (zobrist_recorder.count(zobrist_val) && zobrist_recorder[zobrist_val].depth >= max_layer - cur_layer){
                 tmpval = zobrist_recorder[zobrist_val].value;
             }
             else{
@@ -66,7 +66,7 @@ int MMSearch(int cur_layer, int max_layer, int cur_side, int ABnum){
         //special
         if (turn+cur_layer == 3 && cur_side == 2){
             swap2();
-            if (zobrist_recorder.count(zobrist_val) && zobrist_recorder[zobrist_val].depth == max_layer - cur_layer){
+            if (zobrist_recorder.count(zobrist_val) && zobrist_recorder[zobrist_val].depth >= max_layer - cur_layer){
                 tmpval = zobrist_recorder[zobrist_val].value;
             }
             else{
@@ -91,7 +91,7 @@ int MMSearch(int cur_layer, int max_layer, int cur_side, int ABnum){
             if (isEnd)  return inf;
 
             update_board(tmppoi.row, tmppoi.col, cur_side);
-            if (zobrist_recorder.count(zobrist_val) && zobrist_recorder[zobrist_val].depth == max_layer - cur_layer){
+            if (zobrist_recorder.count(zobrist_val) && zobrist_recorder[zobrist_val].depth >= max_layer - cur_layer){
                 tmpval = zobrist_recorder[zobrist_val].value;
             }
             else{
@@ -110,7 +110,7 @@ int MMSearch(int cur_layer, int max_layer, int cur_side, int ABnum){
         //special
         if (turn+cur_layer == 3 && cur_side == 2){
             swap2();
-            if (zobrist_recorder.count(zobrist_val) && zobrist_recorder[zobrist_val].depth == max_layer - cur_layer){
+            if (zobrist_recorder.count(zobrist_val) && zobrist_recorder[zobrist_val].depth >= max_layer - cur_layer){
                 tmpval = zobrist_recorder[zobrist_val].value;
             }
             else{
@@ -153,7 +153,10 @@ poin GetNext(int side){
                 if (isEnd)  return tmppoi;
 
                 update_board(tmppoi.row, tmppoi.col, side);
-                tmpval=MMSearch(1, maxlayer, side^3, maxval);
+                if (zobrist_recorder.count(zobrist_val) && zobrist_recorder[zobrist_val].depth >= maxlayer){
+                    tmpval = zobrist_recorder[zobrist_val].value;
+                }
+                else  tmpval=MMSearch(1, maxlayer, side^3, maxval);
                 recover_board(tmppoi.row, tmppoi.col, side);
 
                 if (tmpval == inf)  return tmppoi;

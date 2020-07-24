@@ -536,7 +536,7 @@ struct generator{
         }
 
         std::sort(que, que+que_len, std::greater<pai>());
-        if (que_len>50)  que_len=50;
+        if (que_len>30)  que_len=30;
         while (turn>=3 && que[que_len].val<8)  --que_len;
     }
 
