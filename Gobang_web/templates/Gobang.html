@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>Gobang</title>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+
+
+
+<!--css part-->
+<style type="text/css">
+    body{
+        background: url(/static/backgrounds.png);
+        background-repeat: repeat;
+    }
+
+    #global_div{
+        position: absolute;
+        left: 50%;
+        margin-left: -468px;
+        width: 936px;
+    }
+
+    #board_div{
+        position: absolute;
+        top: 50px;
+        left: 0px;
+        height: 576px;
+        width: 576px;
+        background: url(/static/boards.png);
+        background-size: 576px 576px;
+    }
+
+    #message_div{
+        position: absolute;
+        top: 50px;
+        left: 612px;
+        height: 576px;
+        width: 324px;
+        float: left;
+        background: url(/static/message_boards.png);
+        background-size: 324px 576px;
+    }
+
+    #AIstatus_div{
+        position: absolute;
+        left: 162px;
+        top: 66.6px;
+        height: 36px;
+        width: 108px;
+    }
+
+    #AIstatus_div>img{
+        width: 108px;
+        height: 36px;
+    }
+
+    #Playerstatus_div{
+        position: absolute;
+        left: 162px;
+        top: 117px;
+        height: 36px;
+        width: 108px;
+    }
+
+    #Playerstatus_div>img{
+        width: 108px;
+        height: 36px;
+    }
+
+    #BlackButton_div{
+        position: absolute;
+        left: 63px;
+        top: 255.6px;
+        width: 90px;
+        height: 36px;
+    }
+
+    #BlackButton_div>img{
+        width: 108px;
+        height: 36px;
+    }
+
+    #WhiteButton_div{
+        position: absolute;
+        left: 171px;
+        top: 255.6px;
+        width: 90px;
+        height: 36px;
+    }
+
+    #WhiteButton_div>img{
+        width: 108px;
+        height: 36px;
+    }
+
+    #start_div{
+        position: absolute;
+        left: 63px;
+        top: 302.4px;
+        width: 198px;
+        height: 43.2px;
+    }
+
+    #start_div>img{
+        width: 216px;
+        height: 72px;
+    }
+
+    #messageboard_div{
+        position: absolute;
+        left: 54px;
+        top: 403.2px;
+        width: 216px;
+        height: 75.6px;
+    }
+
+    #reverse_div{
+        position: absolute;
+        left: 79.2px;
+        top: 482.4px;
+        width: 165.6px;
+        height: 32.4px;
+    }
+
+    #reverse_div>img{
+        width: 180px;
+        height: 36px;
+    }
+    
+    #board_table{
+        margin: 18px;
+        height: 540px;
+        width: 540px;
+        border-collapse:collapse;
+    }
+
+    td{
+        width: 36px;
+        height: 36px;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    td>img{
+        position: relative;
+        left: 3px;
+        top: 3px;
+        width: 30px;
+        height: 30px;
+    }
+
+    td:hover{
+        background: url(/static/hover.png);
+        background-size: 36px 36px;
+    }
+</style>
+</head>
+
+
+
+
+
+
+<body>
+<div id="global_div">
+    <div id="board_div">
+        <table id="board_table">
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        </table>
+    </div>
+
+    <div id="message_div">
+        <div id="AIstatus_div"></div>
+        <div id="Playerstatus_div"></div>
+        <div id="BlackButton_div" onclick="choose_black()"><img src="/static/black_but_click.png" alt="黑棋按钮"></div>
+        <div id="WhiteButton_div" onclick="choose_white()"><img src="/static/white_but_free.png" alt="白棋按钮"></div>
+        <div id="start_div" onclick="initialize()"><img src="/static/start_game.png" alt="START"></div>
+        <div id="messageboard_div"></div>
+        <div id="reverse_div" style="visibility: hidden;" onclick="flips_board()"><img src="/static/reverse_but.png" alt="REVERSE"></div>
+    </div>
+</div>
+
+
+
+
+
+
+<!--js part-->
+<script src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script>
+<script type="text/javascript">
+    var piece_number;
+    var steps;
+    var tmp_playerside = 1;
+    var PlayerSide;
+    var isStart = false;
+    var isProcessing = false;
+    var last_pie_row;
+    var last_pie_col;
+    var gobang_board=new Array (15);
+    for (var i=0; i<15; ++i){
+        gobang_board[i]=new Array (15);
+    }
+    for (var i=0; i<225; ++i){
+        document.getElementsByTagName('td')[i].style.backgroundSize = "0px 0px";
+    }
+
+    function choose_black(){
+        tmp_playerside = 1;
+        document.getElementById("BlackButton_div").innerHTML = "<img src=\"/static/black_but_click.png\" alt=\"黑棋按钮\">";
+        document.getElementById("WhiteButton_div").innerHTML = "<img src=\"/static/white_but_free.png\" alt=\"白棋按钮\">";
+    }
+
+    function choose_white(){
+        tmp_playerside = 2;
+        document.getElementById("BlackButton_div").innerHTML = "<img src=\"/static/black_but_free.png\" alt=\"黑棋按钮\">";
+        document.getElementById("WhiteButton_div").innerHTML = "<img src=\"/static/white_but_click.png\" alt=\"白棋按钮\">";
+    }
+
+    function update_last(r, c, side){
+        if (side == 1){
+            gobang_board[r][c]=1;
+            document.getElementsByTagName('td')[r*15+c].innerHTML = "<img src = \"/static/black_pie_last.png\" alt=\"@\">";
+            if (last_pie_row != -1){
+                document.getElementsByTagName('td')[last_pie_row*15+last_pie_col].innerHTML = "<img src = \"/static/white_pieces.png\" alt=\"O\">";
+            }
+            last_pie_row = r;
+            last_pie_col = c;
+        }
+        else{
+            gobang_board[r][c]=2;
+            document.getElementsByTagName('td')[r*15+c].innerHTML = "<img src = \"/static/white_pie_last.png\" alt=\"O\">";
+            if (last_pie_row != -1){
+                document.getElementsByTagName('td')[last_pie_row*15+last_pie_col].innerHTML = "<img src = \"/static/black_pieces.png\" alt=\"@\">";
+            }
+            last_pie_row = r;
+            last_pie_col = c;
+        }
+    }
+
+    function initialize(){
+        piece_number = 0;
+        steps = 0;
+        isStart = true;
+        isProcessing = true;
+        PlayerSide = tmp_playerside;
+        last_pie_row = -1;
+        last_pie_col = -1;
+        document.getElementById("messageboard_div").innerHTML = "";
+        for (var i=0; i<225; ++i){
+            document.getElementsByTagName('td')[i].onclick = action;
+            document.getElementsByTagName('td')[i].innerHTML = '';
+        }
+        for (var i=0; i<15; ++i){
+            for (var j=0; j<15; ++j){
+                gobang_board[i][j]=0;
+            }
+        }
+
+        document.getElementById("start_div").innerHTML = "<img src=\"/static/restart_game.png\" alt=\"RESTART\">";
+        if (PlayerSide == 1){
+            document.getElementById("Playerstatus_div").innerHTML = "<img src=\"/static/black_tip.png\" alt=\"Black\">";
+            document.getElementById("AIstatus_div").innerHTML = "<img src=\"/static/white_tip.png\" alt=\"White\">";
+        }
+        else{
+            document.getElementById("Playerstatus_div").innerHTML = "<img src=\"/static/white_tip.png\" alt=\"White\">";
+            document.getElementById("AIstatus_div").innerHTML = "<img src=\"/static/black_tip.png\" alt=\"Black\">";
+        }
+
+        $.ajax({
+            url: "/initialize",   //对应flask中的路由
+            type: "POST",   //请求方法
+            data: String(PlayerSide),   //传送的数据
+            dataType: "text", //传送的数据类型
+            success: function (data) {  //成功得到返回数据后回调的函数
+                console.log(data)
+            }
+        })
+        if (PlayerSide == 2){
+            piece_number = 1;
+            update_last(7, 7, 1);
+            steps = 1;
+        }
+        for (var i=0; i<225; ++i){
+            document.getElementsByTagName('td')[i].style.backgroundSize = "36px 36px";
+        }
+        isProcessing = false;
+    }
+
+    function flips_board(){
+        if (isProcessing == true)  return;
+        if (steps != 3)  return;
+        isProcessing = true;
+        document.getElementById("reverse_div").style.visibility = "hidden";
+        document.getElementById("messageboard_div").innerHTML = "";
+
+        for (var i=0; i<225; ++i){
+            document.getElementsByTagName('td')[i].style.backgroundSize = "0px 0px";
+        }
+
+        for (var i=0; i<15; ++i){
+            for (var j=0; j<15; ++j){
+                if (gobang_board[i][j] == 1){
+                    gobang_board[i][j] = 2;
+                    document.getElementsByTagName('td')[i*15+j].innerHTML = "<img src = \"/static/white_pieces.png\" alt=\"O\">";
+                }
+                else if (gobang_board[i][j] == 2){
+                    gobang_board[i][j] = 1;
+                    document.getElementsByTagName('td')[i*15+j].innerHTML = "<img src = \"/static/black_pieces.png\" alt=\"@\">";
+                }
+            }
+        }
+        last_pie_col = -1;
+        last_pie_row = -1;
+        ++steps;
+
+        $.ajax({
+            url: "/action",   //对应flask中的路由
+            type: "POST", //请求方法
+            data: String(-1) + ' ' + String(-1),   //传送的数据
+            dataType: "json", //传送的数据类型
+            success: function (data) {  //成功得到返回数据后回调的函数
+                update_last(data.row, data.col, 1);
+                ++piece_number;
+                ++steps;
+            }
+        })
+        for (var i=0; i<225; ++i){
+            document.getElementsByTagName('td')[i].style.backgroundSize = "36px 36px";
+        }
+        isProcessing = false;
+    }
+
+    function isWin(r, c, side){
+        var row=1;
+        var col=1;
+        var lef_top=1;
+        var rig_top=1;
+        var cur_r;
+        var cur_c;
+
+        cur_r=r+1;
+        cur_c=c;
+        while (cur_r<15 && gobang_board[cur_r][cur_c] == side){
+            ++cur_r;
+            ++row;
+        }
+
+        cur_r=r-1;
+        cur_c=c;
+        while (cur_r>=0 && gobang_board[cur_r][cur_c] == side){
+            --cur_r;
+            ++row;
+        }
+
+        if (row >= 5)  return true;
+
+        cur_r=r;
+        cur_c=c+1;
+        while (cur_c<15 && gobang_board[cur_r][cur_c] == side){
+            ++cur_c;
+            ++col;
+        }
+
+        cur_r=r;
+        cur_c=c-1;
+        while (cur_c>=0 && gobang_board[cur_r][cur_c] == side){
+            --cur_c;
+            ++col;
+        }
+
+        if (col >= 5)  return true;
+
+        cur_r=r-1;
+        cur_c=c-1;
+        while (cur_c>=0 && cur_r>=0 && gobang_board[cur_r][cur_c] == side){
+            --cur_c;
+            --cur_r;
+            ++lef_top;
+        }
+
+        cur_r=r+1;
+        cur_c=c+1;
+        while (cur_c<15 && cur_r<15 && gobang_board[cur_r][cur_c] == side){
+            ++cur_c;
+            ++cur_r;
+            ++lef_top;
+        }
+
+        if (lef_top >= 5)  return true;
+
+        cur_r=r-1;
+        cur_c=c+1;
+        while (cur_c<15 && cur_r>=0 && gobang_board[cur_r][cur_c] == side){
+            ++cur_c;
+            --cur_r;
+            ++rig_top;
+        }
+
+        cur_r=r+1;
+        cur_c=c-1;
+        while (cur_c>=0 && cur_r<15 && gobang_board[cur_r][cur_c] == side){
+            --cur_c;
+            ++cur_r;
+            ++rig_top;
+        }
+
+        if (rig_top >= 5)  return true;
+
+        return false;
+    }
+
+    function action(){
+        if (isStart == false)  return;
+        if (isProcessing == true)  return;
+        if (this.innerHTML != '')  return;
+        isProcessing = true;
+        for (var i=0; i<225; ++i){
+            document.getElementsByTagName('td')[i].style.backgroundSize = "0px 0px";
+        }
+
+        if (PlayerSide == 1){
+            var pair = {row : this.parentNode.rowIndex, col : this.cellIndex};
+            update_last(this.parentNode.rowIndex, this.cellIndex, 1)
+            ++piece_number;
+            ++steps;
+            if (steps == 5){
+                document.getElementById("messageboard_div").innerHTML = "";
+            }
+
+            if (isWin(this.parentNode.rowIndex, this.cellIndex, 1)){
+                isStart = false;
+                document.getElementById("messageboard_div").innerHTML = "<img src = \"/static/message_wins.png\" alt=\"你赢了！\">";
+                isProcessing = false;
+                return;
+                // TODO: finished
+            }
+
+            if (piece_number == 225){
+                isStart = false;
+                document.getElementById("messageboard_div").innerHTML = "<img src = \"/static/message_tie.png\" alt=\"平局！\">";
+                isProcessing = false;
+                return;
+            }
+
+            $.ajax({
+                url: "/action",   //对应flask中的路由
+                type: "POST", //请求方法
+                data: String(pair.row) + ' ' + String(pair.col),   //传送的数据
+                dataType: "json", //传送的数据类型
+                success: function (data) {  //成功得到返回数据后回调的函数
+                    if (data.row == -1){
+                        for (var i=0; i<15; ++i){
+                            for (var j=0; j<15; ++j){
+                                if (gobang_board[i][j] == 1){
+                                    gobang_board[i][j] = 2;
+                                    document.getElementsByTagName('td')[i*15+j].innerHTML = "<img src = \"/static/white_pieces.png\" alt=\"O\">";
+                                }
+                                else if (gobang_board[i][j] == 2){
+                                    gobang_board[i][j] = 1;
+                                    document.getElementsByTagName('td')[i*15+j].innerHTML = "<img src = \"/static/black_pieces.png\" alt=\"@\">";
+                                }
+                            }
+                        }
+                        last_pie_row = -1;
+                        last_pie_col = -1;
+                        document.getElementById("messageboard_div").innerHTML = "<img src = \"/static/message_AIflip.png\" alt=\"AI翻转了棋面！\">";
+                        for (var i=0; i<225; ++i){
+                            document.getElementsByTagName('td')[i].style.backgroundSize = "36px 36px";
+                        }
+                        ++steps;
+                    }
+                    else{
+                        update_last(data.row, data.col, 2);
+                        ++piece_number;
+                        ++steps;
+                        if (isWin(data.row, data.col, 2)){
+                            isStart = false;
+                            document.getElementById("messageboard_div").innerHTML = "<img src = \"/static/message_loses.png\" alt=\"你输了。\">";
+                            // TODO: finished
+                        }
+                        else{
+                            if (piece_number == 225){
+                                isStart = false;
+                                document.getElementById("messageboard_div").innerHTML = "<img src = \"/static/message_tie.png\" alt=\"平局！\">";
+                                isProcessing = false;
+                                return;
+                            }
+                            for (var i=0; i<225; ++i){
+                                document.getElementsByTagName('td')[i].style.backgroundSize = "36px 36px";
+                            }
+                        }
+                    }
+                }
+            })
+        }
+        else{
+            var pair = {row : this.parentNode.rowIndex, col : this.cellIndex};
+            update_last(this.parentNode.rowIndex, this.cellIndex, 2);
+            ++piece_number;
+            ++steps;
+
+            if (steps == 4){
+                document.getElementById("reverse_div").style.visibility = "hidden";
+                document.getElementById("messageboard_div").innerHTML = "";
+            }
+
+            if (isWin(this.parentNode.rowIndex, this.cellIndex, 2)){
+                isStart = false;
+                document.getElementById("messageboard_div").innerHTML = "<img src = \"/static/message_wins.png\" alt=\"你赢了！\">";
+                isProcessing = false;
+                return;
+                // TODO: finished
+            }
+            if (piece_number == 225){
+                isStart = false;
+                document.getElementById("messageboard_div").innerHTML = "<img src = \"/static/message_tie.png\" alt=\"平局！\">";
+                isProcessing = false;
+                return;
+            }
+
+            $.ajax({
+                url: "/action",   //对应flask中的路由
+                type: "POST", //请求方法
+                data: String(pair.row) + ' ' + String(pair.col),   //传送的数据
+                dataType: "json", //传送的数据类型
+                success: function (data) {  //成功得到返回数据后回调的函数
+                    update_last(data.row, data.col, 1);
+                    ++piece_number;
+                    ++steps;
+                    if (steps == 3){
+                        document.getElementById("reverse_div").style.visibility = "visible";
+                        document.getElementById("messageboard_div").innerHTML = "<img src = \"/static/message_third.png\" alt=\"点击按钮以改变棋子颜色\">";
+                    }
+                    if (isWin(data.row, data.col, 1)){
+                        isStart = false;
+                        document.getElementById("messageboard_div").innerHTML = "<img src = \"/static/message_loses.png\" alt=\"你输了。\">";
+                        // TODO: finished
+                    }
+                    else{
+                        if (piece_number == 225){
+                            isStart = false;
+                            document.getElementById("messageboard_div").innerHTML = "<img src = \"/static/message_tie.png\" alt=\"平局！\">";
+                            isProcessing = false;
+                            return;
+                        }
+                        for (var i=0; i<225; ++i){
+                            document.getElementsByTagName('td')[i].style.backgroundSize = "36px 36px";
+                        }
+                    }
+                }
+            })
+        }
+
+        
+
+        isProcessing = false;
+    }
+</script>
+</body>
+</html>
