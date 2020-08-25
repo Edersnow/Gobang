@@ -349,7 +349,8 @@
             data: String(PlayerSide),   //传送的数据
             dataType: "text", //传送的数据类型
             success: function (data) {  //成功得到返回数据后回调的函数
-                console.log(data)
+                console.log(data);
+                isProcessing = false;
             }
         })
         if (PlayerSide == 2){
@@ -360,7 +361,6 @@
         for (var i=0; i<225; ++i){
             document.getElementsByTagName('td')[i].style.backgroundSize = "36px 36px";
         }
-        isProcessing = false;
     }
 
     function flips_board(){
@@ -399,12 +399,12 @@
                 update_last(data.row, data.col, 1);
                 ++piece_number;
                 ++steps;
+                isProcessing = false;
             }
         })
         for (var i=0; i<225; ++i){
             document.getElementsByTagName('td')[i].style.backgroundSize = "36px 36px";
         }
-        isProcessing = false;
     }
 
     function isWin(r, c, side){
@@ -567,6 +567,7 @@
                             }
                         }
                     }
+                    isProcessing = false;
                 }
             })
         }
@@ -624,13 +625,10 @@
                             document.getElementsByTagName('td')[i].style.backgroundSize = "36px 36px";
                         }
                     }
+                    isProcessing = false;
                 }
             })
         }
-
-        
-
-        isProcessing = false;
     }
 </script>
 </body>
