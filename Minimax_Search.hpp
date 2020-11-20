@@ -3,7 +3,6 @@
 #include "Global.hpp"
 #include "Generator.hpp"
 #include "Evaluator.hpp"
-#include "Display.hpp"
 
 inline void swap2(){
     for (int i=0; i<15; ++i){
@@ -137,7 +136,7 @@ poin GetNext(int side){
     bool isEnd;
     int tmpval;
     int maxval;
-    int maxdepth=6;
+    int maxdepth=6;  //搜索的最大深度
     poin tmppoi;
     poin maxpoi;
     generator cur_gen(side);
